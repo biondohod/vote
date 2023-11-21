@@ -1,0 +1,128 @@
+.pool {
+  width: 800px;
+  margin: 0 auto;
+
+  &__content {
+    margin-top: 62px;
+  }
+  &__descr {
+    display: block;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 26px;
+  }
+  &__list {
+    list-style: none;
+    width: 500px;
+    margin: 0 auto;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  &__item {
+    border: 1px solid #000;
+    border-radius: 10px;
+    background: #F5F5F5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+  }
+  &__row {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  &__option {
+    font-size: 16px;
+    line-height: 19px;
+  }
+  &__count {
+    font-size: 16px;
+    line-height: 19px;
+    color: #638199;
+  }
+  &__percent {
+    font-weight: 700;
+  }
+  &__checked {
+    width: 15px;
+    height: 12px;
+    background: url("../../resources/img/check.svg") no-repeat center center;
+    margin-right: 5px;
+  }
+  &__chat {
+    margin-top: 70px;
+    //padding: 20px;
+    width: 800px;
+    min-height: 300px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #FFF;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.chat {
+  &__list {
+    margin: 0;
+    padding: 20px;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    &--div {
+      flex-grow: 1;
+      
+    }
+  }
+  &__img {
+    width: 36px;
+    height: 36px;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  &__content {
+    display: grid;
+    gap: 5px;
+  }
+  &__name {
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 700;
+  }
+  &__time {
+    font-size: 10px;
+    line-height: 12px;
+    color: #4A4A4A;
+    margin-left: 8px;
+  }
+  &__text {
+    font-size: 12px;
+    line-height: 12px;
+  }
+  &__form {
+    position: relative;
+
+  }
+  &__input {
+    width: 100%;
+    border: 1px solid #000;
+    border-radius: 5px;
+  }
+
+  &__btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: none;
+    background: url("../../resources/img/arrow.svg") no-repeat center center;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+}
