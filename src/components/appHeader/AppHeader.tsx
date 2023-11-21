@@ -5,12 +5,12 @@ import {Link} from "react-router-dom";
     const AppHeader = () => {
     return (
         <header className="app-header">
-            <div className="app-header__content app-header__content--unauthorized">
+            <div className="app-header__content app-header__content--authorized">
                 <div>
                     <Link to='/'>
                         <span className="app-header__btn app-header--authorized hover">Голосования</span>
                     </Link>
-                    <div></div>
+                    <div style={{width: 1, height: 1}}></div>
                 </div>
                 <img src={logo} alt="Логотип Портала Айкидо." className="app-header__logo"/>
                 <div className="app-header__container app-header--unauthorized">
@@ -21,7 +21,7 @@ import {Link} from "react-router-dom";
                         <span className="app-header__btn hover">Регистрация</span>
                     </Link>
                 </div>
-                <Link to='profile'>
+                <Link to='profile' className={'app-header--authorized'}>
                     <span className="app-header__btn app-header--authorized">Профиль</span>
                 </Link>
 
