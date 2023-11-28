@@ -1,21 +1,21 @@
 .app-header {
   background: #E6E6E6;
   position: relative;
-  padding: 40px 0;
+  //padding: 40px 0;
   &__logo {
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
+    //position: absolute;
+    //top: -5px;
+    //left: 50%;
+    //transform: translateX(-50%);
     //margin: 0 auto;
   }
   &__content {
     max-width: 1600px;
     margin: 0 auto;
     padding: 0 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
 
     &--unauthorized {
       .app-header--authorized {

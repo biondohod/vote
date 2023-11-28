@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
     const AppHeader = () => {
     return (
         <header className="app-header">
-            <div className="app-header__content app-header__content--authorized">
+            <div className="app-header__content app-header__content--unauthorized">
                 <div>
                     <Link to='/'>
                         <span className="app-header__btn app-header--authorized hover">Голосования</span>
@@ -21,10 +21,17 @@ import {Link} from "react-router-dom";
                         <span className="app-header__btn hover">Регистрация</span>
                     </Link>
                 </div>
-                <Link to='profile' className={'app-header--authorized'}>
-                    <span className="app-header__btn app-header--authorized">Профиль</span>
-                </Link>
-
+                <div className="app-header__wrapper">
+                    <Link to='chats' className={'app-header--authorized'}>
+                        <span className="app-header__btn app-header--authorized">Диалоги</span>
+                    </Link>
+                    <Link to='profile' className={'app-header--authorized'}>
+                        <span className="app-header__btn app-header--authorized">Профиль</span>
+                    </Link>
+                    <Link to='groups' className={'app-header--authorized'}>
+                        <span className="app-header__btn app-header--authorized">Группы</span>
+                    </Link>
+                </div>
             </div>
         </header>
     );

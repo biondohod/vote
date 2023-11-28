@@ -2,7 +2,7 @@ import Votes from "../votes/Votes";
 
 const VotesPage = () => {
     return (
-        <Votes/>
+        <Votes valueOf={true}/>
     )
 }
 

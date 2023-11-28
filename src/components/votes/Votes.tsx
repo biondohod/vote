@@ -1,9 +1,14 @@
 import {Link} from "react-router-dom";
 import './votes.scss';
-const Votes = () => {
+import {useState} from "react";
+
+const Votes = (props: any) => {
+
+    const [active, setActive] = useState<boolean>(props.valueOf);
+
     return (
         <>
-            <h1 className="main__title">Активные голосования</h1>
+            <h1 className="main__title">{active ? 'Активные ' : 'Завершенные'} голосования</h1>
             <div className="votes__content">
                 <Link to='newVote'>
                     <button className="main__btn hover">Создать</button>

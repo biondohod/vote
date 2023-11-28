@@ -1,0 +1,117 @@
+.groups {
+  &__content {
+    max-width: 1000px;
+    margin: 0 auto;
+
+    .main__btn {
+      display: block;
+      margin: 10px auto 38px;
+    }
+    
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: 288px 1fr;
+    justify-items: center;
+    background-color: #FFF;
+  }
+
+  &__left-column {
+    border: 1px solid #000;
+    border-radius: 10px;
+    width: 100%;
+  }
+
+  &__list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    max-height: 483px;
+    overflow-y: auto;
+  }
+
+  &__item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #000;
+    cursor: pointer;
+    border-radius: 10px;
+    &--selected {
+      background-color: #A1DDFF;
+    }
+  }
+
+  &__name {
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0;
+  }
+
+  &__div {
+    display: grid;
+  }
+
+  &__count {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  &__right-column {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    align-content: start;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 15px;
+    .groups__name {
+      margin: 0 auto;
+    }
+    .main__btn {
+      font-size: 12px;
+      line-height: 15px;
+      padding: 7px 8px;
+      margin: 14px auto 10px;
+    }
+  }
+
+  &__members {
+    width: 619px;
+    max-height: 335px;
+    overflow-y: auto;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    border: 2px solid #000;
+    border-radius: 10px;
+  }
+
+  &__member {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.5px 3px;
+    border-bottom: 1px solid #000;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 17px;
+    color: #638199;
+  }
+
+  &__btn {
+    font-size: 12px;
+    line-height: 15px;
+    color: #000;
+    padding: 5px 0;
+    background-color: #FF0000;
+    border: none;
+    border-radius: 10px;
+  }
+}
