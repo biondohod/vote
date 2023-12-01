@@ -9,6 +9,17 @@
     //transform: translateX(-50%);
     //margin: 0 auto;
   }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__something {
+    display: flex;
+    align-items: center;
+  }
   &__content {
     max-width: 1600px;
     margin: 0 auto;

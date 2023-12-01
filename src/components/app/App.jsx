@@ -20,7 +20,7 @@ const App = () => {
     return (
         <Router>
             <div className="App">
-                <AppHeader/>
+                <AppHeader isAuthorized={isAuthorized} setIsAuthorized={setIsAuthorized}/>
                 <main>
                     <div className="main__content">
                         <Suspense>
@@ -28,10 +28,10 @@ const App = () => {
                                 <Route path='/' element={<VotesPage/>}/>
                                 <Route path='/finished' element={<FinishedVotesPage/>}/>
                                 <Route path='/signUp' element={<SignUpPage setIsAuthorized={setIsAuthorized}/>}/>
-                                <Route path='/signIn' element={<SignInPage/>}/>
+                                <Route path='/signIn' element={<SignInPage setIsAuthorized={setIsAuthorized}/>}/>
                                 <Route path='/newVote' element={<NewVotePage/>}/>
-                                <Route path='/vote/1' element={<VoteDetailsPage/>}/>
-                                <Route path='/profile' element={<ProfilePage/>}/>
+                                <Route path={`/vote/:voteId`} element={<VoteDetailsPage/>}/>
+                                <Route path='/profile' element={<ProfilePage setIsAuthorized={setIsAuthorized}/>}/>
                                 <Route path='/groups' element={<GroupsPage/>}/>
                                 <Route path='/chats' element={<ChatsPage/>}/>
                             </Routes>

@@ -7,3 +7,4 @@ const SignUpPage = ({setIsAuthorized}) => {
 }
 
 export default SignUpPage;
+

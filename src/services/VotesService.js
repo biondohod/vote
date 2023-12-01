@@ -10,7 +10,7 @@ async function createUser(data) {
 }
 
 async function getUserId(data) {
-    return  await fetch(`${apiBase}login`, {
+    return  await fetch(`${apiBase}user/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -29,8 +29,8 @@ async function getProfileInfo(id, token) {
     return await response.json();
 }
 
-async function updateUser(data, id, token) {
-    return  await fetch(`${apiBase}/user/${id}`, {
+async function updateUser(data, token) {
+    return  await fetch(`${apiBase}user`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -61,6 +61,8 @@ async function getAllPools(token) {
     });
     return await response.json();
 }
+
+
 
 async function getPool(id, token) {
     const response = await fetch(`${apiBase}pool/${id}`, {
