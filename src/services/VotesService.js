@@ -95,4 +95,14 @@ async function votePool(data, id, token) {
     });
 }
 
-export {createUser, getUserId, getProfileInfo, updateUser, createPool, getAllPools, getPool, deletePool, votePool};
+async function deleteVotePool(data, id, token) {
+    return await fetch(`${apiBase}pool/${id}/vote`, {
+        'method': 'POST',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }, body: data
+    });
+}
+
+export {createUser, getUserId, getProfileInfo, updateUser, createPool, getAllPools, getPool, deletePool, votePool, deleteVotePool};

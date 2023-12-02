@@ -10,7 +10,6 @@ const Votes = ({valueOf}) => {
     const getVotes = async () => {
         getAllPools(localStorage.getItem('token')).then((result) => {
             setVotes(result);
-            console.log(result);
         });
     }
 
