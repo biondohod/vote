@@ -18,6 +18,7 @@ const Votes = ({valueOf}) => {
     }, []);
 
     const renderVotes = () => {
+        console.log(votes)
         if (votes) {
             if (votes.length > 0) {
                 return votes.map((item, i) => {
@@ -62,14 +63,23 @@ const Votes = ({valueOf}) => {
         )
 }
 
+    const renderNewVote = () => {
+        if (localStorage.getItem('isAdmin') === 'true') {
+            return (
+                <Link to='newVote'>
+                    <button className="main__btn hover">Создать</button>
+                </Link>
+            )
+        }
+        return <></>
+    }
+
 
     return (
         <>
             <h1 className="main__title">{active ? 'Активные ' : 'Завершенные'} голосования</h1>
             <div className="votes__content">
-                <Link to='newVote'>
-                    <button className="main__btn hover">Создать</button>
-                </Link>
+                {renderNewVote()}
                 <ul className="votes__list">
                     {renderVotes()}
                 </ul>

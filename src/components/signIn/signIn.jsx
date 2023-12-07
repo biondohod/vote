@@ -1,4 +1,4 @@
-import {getUserId} from "../../services/VotesService";
+import {getUserId, getProfileInfo} from "../../services/VotesService";
 
 const SignIn = ({setIsAuthorized}) => {
     const logIn = async (e) => {

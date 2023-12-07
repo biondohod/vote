@@ -5,29 +5,31 @@ import { getPool, votePool, deleteVotePool } from "../../services/VotesService";
 
 const VoteDetails = () => {
     const [vote, setVote] = useState({});
+    const [refreshKey, setRefreshKey] = useState(0); // Уникальный ключ для вызова перерендера
     const voteId = useParams().voteId;
 
     useEffect(() => {
         getPool(voteId, localStorage.getItem('token')).then((result) => {
             setVote(result);
         });
-    }, [voteId]);
+    }, [voteId, refreshKey]); // Добавлен refreshKey в зависимости useEffect
 
     const handleOptionClick = async (optionId) => {
         try {
-            if (!vote.votedOptionId) {
+            if (vote.vote === 0) {
                 // Если пользователь еще не голосовал, то проголосовать
-                await votePool({ optionId }, voteId, localStorage.getItem('token'));
-            } else if (vote.votedOptionId === optionId) {
+                const json = JSON.stringify({ "id": optionId });
+                await votePool(json, voteId, localStorage.getItem('token'));
+            } else if (vote.vote === optionId) {
                 // Если пользователь голосовал за текущую опцию, то удалить голос
-                await deleteVotePool(vote.votedOptionId, voteId, localStorage.getItem('token'));
+                await deleteVotePool(voteId, localStorage.getItem('token'));
             } else {
-                console.log("You have already voted for another option.");
+                window.alert("Вы уже проголосовали за другой вариант. Отмените голос и попробуйте снова.");
                 return;
             }
 
-            // Обновить состояние, чтобы вызвать перерисовку компонента
-            setVote((prevVote) => ({ ...prevVote, votedOptionId: optionId }));
+            // Увеличиваем refreshKey для вызова перерендера
+            setRefreshKey((prevKey) => prevKey + 1);
         } catch (error) {
             console.error("Error:", error.message);
         }
@@ -38,7 +40,7 @@ const VoteDetails = () => {
             const totalVotes = vote.options.reduce((total, option) => total + option.count, 0);
             const options = vote.options.map((option) => {
                 const percentages = totalVotes > 0 ? (option.count / totalVotes) * 100 : 0;
-                const isVoted = vote.votedOptionId === option.id;
+                const isVoted = vote.vote === option.id;
 
                 return (
                     <li
@@ -52,7 +54,7 @@ const VoteDetails = () => {
                             <span className="pool__count">• {option.count}</span>
                         </div>
                         <div className="pool__row">
-                            {isVoted && <span className="pool__checked"></span>}
+                            {vote.vote === option.id && <span className="pool__checked"></span>}
                             <span className="pool__percent">{percentages}%</span>
                         </div>
                     </li>
@@ -72,7 +74,7 @@ const VoteDetails = () => {
             return (
                 <div className="empty-list">There are no pools yet :(</div>
             );
-        }
+        } 
     };
 
     return (

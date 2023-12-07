@@ -52,7 +52,7 @@ const NewVote = () => {
         const voteData = {
             name: formData.get("name"),
             description: formData.get("description"),
-            group_id: 1, // Здесь вам нужно указать нужное значение
+            group_id: 2, // Здесь вам нужно указать нужное значение
             is_anonymous: formData.get("anon") === "on",
             options,
             open_for: parseInt(formData.get("select"), 10),

@@ -95,8 +95,40 @@ async function votePool(data, id, token) {
     });
 }
 
-async function deleteVotePool(data, id, token) {
+async function deleteVotePool(id, token) {
     return await fetch(`${apiBase}pool/${id}/vote`, {
+        'method': 'DELETE',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    });
+}
+
+async function getAllGroups(token) {
+    const response = await fetch(`${apiBase}group`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+    });
+    return await response.json();
+}
+
+const getGroup = async (id, token) => {
+    const response = await fetch(`${apiBase}group/${id}/user`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+    });
+    return await response.json();
+}
+
+async function createGroup(data, token) {
+    return await fetch(`${apiBase}group`, {
         'method': 'POST',
         'headers': {
             'Content-Type': 'application/json',
@@ -105,4 +137,34 @@ async function deleteVotePool(data, id, token) {
     });
 }
 
-export {createUser, getUserId, getProfileInfo, updateUser, createPool, getAllPools, getPool, deletePool, votePool, deleteVotePool};
+async function editGroup(id, data, token) {
+    return await fetch(`${apiBase}group/${id}`, {
+        'method': 'PATCH',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }, body: data
+    });
+}
+
+async function groupAddUser(id, data, token) {
+    return await fetch(`${apiBase}group/${id}/user`, {
+        'method': 'POST',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }, body: data
+    });
+}
+
+async function groupDeleteUser(idGroup, idUser, token) {
+    return await fetch(`${apiBase}group/${idGroup}/user/${idUser}`, {
+        'method': 'DELETE',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    });
+}
+
+export {createUser, getUserId, getProfileInfo, updateUser, createPool, getAllPools, getPool, deletePool, votePool, deleteVotePool, createGroup, getAllGroups, getGroup, editGroup, groupAddUser, groupDeleteUser};

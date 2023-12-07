@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import AppHeader from '../appHeader/AppHeader';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {lazy, Suspense} from "react";
+import {getProfileInfo} from "../../services/VotesService";
 
 const SignUpPage = lazy(() => import("../pages/SignUpPage"));
 const SignInPage = lazy(() => import("../pages/SignInPage"));
@@ -17,6 +18,18 @@ const App = () => {
     // const [currentUser, setCurrentUser] = useState({});
     // const [userData, setUserData] = useState({});
     const [isAuthorized, setIsAuthorized] = useState(false);
+
+    useEffect(() => {
+        if(isAuthorized) {
+            getProfileInfo(localStorage.getItem('id'), localStorage.getItem('token')).then((result) => {
+                if (result.groups[0].id === 1) {
+                    localStorage.setItem('isAdmin', 'true');
+                } else {
+                    localStorage.setItem('isAdmin', 'false');
+                }
+            });
+        }
+    }, [isAuthorized]);
     return (
         <Router>
             <div className="App">

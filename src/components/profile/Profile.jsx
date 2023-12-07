@@ -39,6 +39,7 @@ const Profile = ({setIsAuthorized}) => {
         localStorage.removeItem('id');
         localStorage.removeItem('token');
         localStorage.removeItem('password');
+        localStorage.removeItem('isAdmin');
         setIsAuthorized(false);
         window.location.href = `/signIn`;
     }
@@ -55,7 +56,11 @@ const Profile = ({setIsAuthorized}) => {
                     <img src={avatar} alt="Ваше фото." width={150} height={150} className="profile__img"/>
                     <form action="" className="form form--avatar" id="signUp">
                         {/*<input type="file" name={'avatar'} className="profile__input" accept={"image/png, image/jpeg"}/>*/}
-                        {/*<button className="form__btn hover">Сменить аватар</button>*/}
+                        <span>
+                            Ваш ID:
+                            <span style={{fontSize: 18, fontWeight: 700}}> {localStorage.getItem('id')}</span>.
+                            Сообщите его преподавателю для добавления в группу
+                        </span>
                     </form>
                 </div>
                 <div className="profile__info">
