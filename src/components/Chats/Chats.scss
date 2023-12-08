@@ -76,6 +76,7 @@
     &--div {
       flex-grow: 1;
 
+      overflow-y: auto;
     }
   }
   &__img {
@@ -128,6 +129,3 @@
   }
 }
 
-.groups__right-column {
-  padding: 0;
-}

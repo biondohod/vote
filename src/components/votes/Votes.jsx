@@ -18,7 +18,6 @@ const Votes = ({valueOf}) => {
     }, []);
 
     const renderVotes = () => {
-        console.log(votes)
         if (votes) {
             if (votes.length > 0) {
                 return votes.map((item, i) => {
@@ -34,6 +33,7 @@ const Votes = ({valueOf}) => {
 
                     let formattedDateTime = `${hours}:${minutes} ${day}.${month}.${year}`;
                     let count = 0;
+                    console.log(item.options)
                     item.options.forEach((option) => {
                         count += option.count;
                     })

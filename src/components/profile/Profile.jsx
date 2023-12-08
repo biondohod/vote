@@ -2,7 +2,7 @@
 import avatar from '../../resources/img/avatarbig.png';
 import './profile.scss';
 import {useState, useEffect} from "react";
-import {getProfileInfo, updateUser} from "../../services/VotesService";
+import {getProfileInfo, updateUser, deleteUser} from "../../services/VotesService";
 
 const Profile = ({setIsAuthorized}) => {
     const [userData, setUserData] = useState({});
@@ -47,6 +47,20 @@ const Profile = ({setIsAuthorized}) => {
     useEffect(() => {
         getUserData(localStorage.getItem('id'));
     }, []);
+
+    const  onDeleteUser = async () => {
+        try {
+            const response = await deleteUser(localStorage.getItem('token'));
+            if (response.ok) {
+                window.alert('Вы успешно удалили профиль!');
+                logOut();
+            } else response.json().then((res) => {
+                window.alert(res.message);
+            })
+        } catch (error) {
+            window.alert(error);
+        }
+    }
     return (
         <div className={'profile'}>
             <button className="profile__logout" onClick={logOut}>Выйти</button>
@@ -85,6 +99,13 @@ const Profile = ({setIsAuthorized}) => {
                         </label>
                         <button className="form__btn hover">Изменить</button>
                     </form>
+                    <button className="profile__delete hover" onClick={onDeleteUser} style={{
+                        padding: 10,
+                        color: 'white',
+                        backgroundColor: 'red',
+                        border: 'none',
+                        borderRadius: 10,
+                    }}>Удалить профиль. !НЕОБРАТИМО!</button>
                 </div>
             </div>
         </div>

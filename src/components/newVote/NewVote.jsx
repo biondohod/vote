@@ -52,7 +52,7 @@ const NewVote = () => {
         const voteData = {
             name: formData.get("name"),
             description: formData.get("description"),
-            group_id: 2, // Здесь вам нужно указать нужное значение
+            group_id: parseInt(formData.get("group_id"), 10),
             is_anonymous: formData.get("anon") === "on",
             options,
             open_for: parseInt(formData.get("select"), 10),
@@ -158,6 +158,17 @@ const NewVote = () => {
                 {/*    />*/}
                 {/*    <span className="form__name">Выбор нескольких вариантов</span>*/}
                 {/*</label>*/}
+                <label className="form__label">
+                    <span className="form__name">Для какой группы голосование?</span>
+                    <input
+                        type="number"
+                        name="group_id"
+                        className="form__input"
+                        placeholder={'ID группы'}
+                        min={1}
+                        onChange={(e) => handleInputChange(e)}
+                    />
+                </label>
                 <label className="form__label form__label--checkbox">
                     <span className="form__name">Закрыть через</span>
                     <select

@@ -13,7 +13,10 @@
   &__wrapper {
     display: grid;
     grid-template-columns: 288px 1fr;
+    margin-top: 24px;
     justify-items: center;
+    align-items: start;
+    border-radius: 10px;
     background-color: #FFF;
   }
 
@@ -48,8 +51,8 @@
   }
 
   &__name {
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 20px;
     margin: 0;
   }
 

@@ -15,7 +15,7 @@ const SignUp = () => {
                 window.location.href = `/signIn`;
             } else {
                 response.json().then((res) => {
-                    window.alert(res.message);
+                    window.alert(res.error);
 
                 });
             }

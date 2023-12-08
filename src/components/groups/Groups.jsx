@@ -19,10 +19,25 @@ const Groups = () => {
                     setSelectedGroup(data[0]);
                     // Получаем пользователей для выбранной группы
                     getGroupUsers(data[0].id);
+                    getGroupsCount(data)
                 }
             })
             .catch((error) => console.error("Error loading groups:", error));
     }, []);
+
+    const getGroupsCount = (groups) => {
+        // Загружаем количество пользователей для каждой группы
+        groups.forEach((group) => {
+            getGroup(group.id, localStorage.getItem('token')).then(
+                (users) => {
+                    setGroupUsersCount((prevCount) => ({
+                        ...prevCount,
+                        [group.id]: users.length,
+                    }));
+                }
+            )
+        });
+    }
 
     const getGroupUsers = (groupId) => {
         // Загружаем пользователей для выбранной группы
@@ -60,7 +75,7 @@ const Groups = () => {
             }
 
             const jsonData = JSON.stringify({ "id": userId });
-            await groupAddUser(localStorage.getItem('id'), jsonData, localStorage.getItem('token'));
+            await groupAddUser(selectedGroup.id, jsonData, localStorage.getItem('token'));
 
             // После добавления пользователя обновляем список пользователей для текущей группы
             getGroupUsers(selectedGroup.id);
@@ -98,9 +113,11 @@ const Groups = () => {
     };
 
     const renderEditGroup = () => {
-        if (localStorage.getItem('isAdmin') === 'true') {
+        if (localStorage.getItem('isAdmin') === 'true' && selectedGroup) {
             return (
-                <button className="group__rename">Редактировать</button>
+                <Link to={`/editGroup/${selectedGroup.id}`}>
+                    <button className="group__rename">Редактировать</button>
+                </Link>
             );
         }
     };
@@ -138,9 +155,8 @@ const Groups = () => {
                                     className={`groups__item ${selectedGroup?.id === group.id ? 'groups__item--selected' : ''}`}
                                     onClick={() => handleGroupClick(group)}
                                 >
-                                    <h2 className="groups__name">{group.name}</h2>
+                                    <h2 className="groups__name">{group.name}. ID:&nbsp;{group.id}</h2>
                                     <div className="groups__div">
-                                        {renderEditGroup()}
                                         <span className="group__count">Участников: {groupUsersCount[group.id] || '?'}</span>
                                     </div>
                                 </li>
@@ -148,16 +164,23 @@ const Groups = () => {
                         </ul>
                     </div>
                     <div className="groups__right-column">
-                        <h2 className="groups__name">{selectedGroup?.name}</h2>
+                        <div style={{display: "flex", gap: 10, justifyContent: "center"}}>
+                            <h2 className="groups__name" style={{margin: 0}}>{selectedGroup?.name}</h2>
+                            {renderEditGroup()}
+                        </div>
                         {renderAddUser()}
                         <ul className="groups__members">
                             {selectedGroup?.users?.map((user) => (
                                 <li key={user ? user.id : undefined} className="groups__member">
                                     <div className="groups__member-info">
-                                        <span className="groups__member-name">{user ? user.name : ''}</span>
+                                        <span className="groups__member-name">{user ? `ID: ${user.id}` : ''}</span>
+                                        <span className="groups__member-name"> • {user ? user.name : ''}</span>
                                         <span className="groups__member-email"> • {user ? user.email : ''}</span>
                                     </div>
-                                    <button className="groups__btn hover" onClick={() => handleDeleteUser(user.id)}>Удалить</button>
+                                    {
+                                        localStorage.getItem('isAdmin') === 'true' ? <button className="groups__btn hover" onClick={() => handleDeleteUser(user.id)}>Удалить</button> : <></>
+                                    }
+
                                 </li>
                             ))}
                         </ul>

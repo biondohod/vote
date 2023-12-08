@@ -24,7 +24,7 @@ const SignIn = ({setIsAuthorized}) => {
                 })
             } else {
                 response.json().then((res) => {
-                    window.alert(res.message);
+                    window.alert(res.error);
                 });
             }
         } catch (error) {

@@ -13,6 +13,8 @@ const VoteDetailsPage = lazy(() => import("../pages/VoteDetailsPage"));
 const ProfilePage = lazy(() => import("../pages/ProfilePage"));
 const GroupsPage = lazy(() => import("../pages/GroupsPage"));
 const ChatsPage = lazy(() => import("../pages/ChatsPage"));
+const NewGroupPage = lazy(() => import("../pages/NewGroupPage"));
+const EditGroupPage = lazy(() => import("../pages/EditGroupPage"));
 
 const App = () => {
     // const [currentUser, setCurrentUser] = useState({});
@@ -46,6 +48,8 @@ const App = () => {
                                 <Route path={`/vote/:voteId`} element={<VoteDetailsPage/>}/>
                                 <Route path='/profile' element={<ProfilePage setIsAuthorized={setIsAuthorized}/>}/>
                                 <Route path='/groups' element={<GroupsPage/>}/>
+                                <Route path='/groups/newGroup' element={<NewGroupPage/>}/>
+                                <Route path={`/editGroup/:groupId`} element={<EditGroupPage/>}/>
                                 <Route path='/chats' element={<ChatsPage/>}/>
                             </Routes>
                         </Suspense>

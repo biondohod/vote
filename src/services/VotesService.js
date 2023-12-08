@@ -167,4 +167,59 @@ async function groupDeleteUser(idGroup, idUser, token) {
     });
 }
 
-export {createUser, getUserId, getProfileInfo, updateUser, createPool, getAllPools, getPool, deletePool, votePool, deleteVotePool, createGroup, getAllGroups, getGroup, editGroup, groupAddUser, groupDeleteUser};
+async function deleteUser(token) {
+    return await fetch(`${apiBase}user`, {
+        'method': 'DELETE',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    });
+}
+
+async function whoVoted(poolId, optionId, token) {
+    const response = await fetch(`${apiBase}pool/${poolId}/vote/${optionId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+    });
+    return await response.json();
+
+}
+
+async function deleteGroup(id, token) {
+    return await fetch(`${apiBase}group/${id}`, {
+        'method': 'DELETE',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    });
+}
+
+async function getGroupMessages(id, token) {
+    const response = await fetch(`${apiBase}chat/${id}?count=25&offset=0`, {
+        'method': 'GET',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    }
+    );
+    return await response.json();
+}
+
+async function sendGroupMessage(id, data, token) {
+    return await fetch(`${apiBase}chat/${id}`, {
+        'method': 'POST',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        body: data
+    });
+}
+
+export {createUser, sendGroupMessage, getGroupMessages, deleteGroup, whoVoted, getUserId, getProfileInfo, updateUser, createPool, getAllPools, getPool, deletePool, votePool, deleteVotePool, createGroup, getAllGroups, getGroup, deleteUser, editGroup, groupAddUser, groupDeleteUser};
