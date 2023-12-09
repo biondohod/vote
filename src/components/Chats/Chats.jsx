@@ -51,12 +51,8 @@ const Chats = () => {
     };
 
     const renderMessages = () => {
+        console.log(messages);
         if (messages.length > 0) {
-            if (messages.error) {
-                return (
-                    <span>Вы не можете читать и писать в этот чат. Обратитесь к преподавателю и сообщите ему свой ID, если вас должны добавить в эту группу.</span>
-                );
-            }
             return (
                         messages.map((message) => (
                             <li className="chat__item">
@@ -71,7 +67,12 @@ const Chats = () => {
                             </li>
                         ))
                     );
-        } else {
+        } else if (messages.error) {
+            return (
+                <span>Вы не можете читать и писать в этот чат. Обратитесь к преподавателю и сообщите ему свой ID, если вас должны добавить в эту группу.</span>
+            );
+        }
+        else {
             return (
                 <span>Нет сообщений</span>
             )
@@ -126,7 +127,7 @@ const Chats = () => {
                                 >
                                     <h2 className="groups__name">{group.name}. ID:&nbsp;{group.id}</h2>
                                     <div className="groups__div">
-                                        <span className="group__count">Участников: {groupUsersCount[group.id] || '?'}</span>
+                                        <span className="group__count">Участников: {groupUsersCount[group.id] || 0}</span>
                                     </div>
                                 </li>
                             ))}

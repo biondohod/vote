@@ -157,7 +157,7 @@ const Groups = () => {
                                 >
                                     <h2 className="groups__name">{group.name}. ID:&nbsp;{group.id}</h2>
                                     <div className="groups__div">
-                                        <span className="group__count">Участников: {groupUsersCount[group.id] || '?'}</span>
+                                        <span className="group__count">Участников: {groupUsersCount[group.id] || 0}</span>
                                     </div>
                                 </li>
                             ))}
