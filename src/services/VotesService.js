@@ -1,4 +1,4 @@
-const apiBase = 'http://web-portfolio.tech/api/';
+const apiBase = 'https://web-portfolio.tech/api/';
 async function createUser(data) {
     return  await fetch(`${apiBase}user`, {
         method: 'POST',
